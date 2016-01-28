@@ -2,7 +2,7 @@
 
 namespace MVC\Model\Form;
 
-class Delete implements \MVC\Model\Form {
+class Edit implements \MVC\Model\Form {
     private $maphper;
     public $successful = false;
 
@@ -10,8 +10,9 @@ class Delete implements \MVC\Model\Form {
         $this->maphper = $maphper;
     }
 
-    public function submit($filter) {
-        $this->maphper->filter($filter)->delete();
+    // TODO: Add data validation
+    public function submit(\stdClass $data) {
+        $this->maphper[] = $data;
         return true;
     }
 
