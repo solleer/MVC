@@ -9,7 +9,7 @@ class Filter {
 		$this->model = $model;
 	}
 
-	public function set_filter($filter) {
+	public function filter($filter) {
 		$this->model->set_filter($filter);
 	}
 

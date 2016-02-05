@@ -8,7 +8,7 @@ class Id {
 		$this->model = $model;
 	}
 
-	public function set_id($id) {
+	public function id($id) {
 		$this->model->set_id($id);
 	}
 
