@@ -14,6 +14,10 @@ class Form {
             $this->model->success();
         }
     }
+
+    public function main($data) {
+        $this->model->main();
+    }
 }
 
 
