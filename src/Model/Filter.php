@@ -1,9 +1,8 @@
 <?php
-
 namespace MVC\Model;
 class Filter implements Filterable {
-    private $maphper;
-    private $filter;
+    protected $maphper;
+    protected $filter = [];
 
     public function __construct(\Maphper\Maphper $maphper) {
         $this->maphper = $maphper;
