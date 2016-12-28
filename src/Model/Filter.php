@@ -8,7 +8,7 @@ class Filter implements Filterable {
         $this->maphper = $maphper;
     }
 
-    public function set_filter($filter) {
+    public function setFilter($filter) {
         $this->filter = $filter;
     }
 

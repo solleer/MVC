@@ -1,0 +1,7 @@
+<nav class="row">
+    <ul class="pagination">
+        <li><i class="fa fa-chevron-left"></i></li><!-- Left Arrow -->
+        <li class="page"><a>Page #</a></li>
+        <li><i class="fa fa-chevron-right"></i></li><!-- Right Arrow -->
+    </ul>
+</nav>

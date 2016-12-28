@@ -1,0 +1,14 @@
+
+
+ul.pagination li.page {
+    repeat: 1, data(getNumberOfPages()), loop;
+}
+ul.pagination li.page a {
+    content: iteration();
+}
+ul.pagination li.page a:attr(href) {
+    content: attr(href) + iteration();
+}
+ul.pagination li.page a:attr(class):[iteration()=data(getCurrentPage())] {
+    content: attr(class) + " active";
+}
