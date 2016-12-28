@@ -1,0 +1,6 @@
+{
+    "name" : "solleer/mvc",
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}
