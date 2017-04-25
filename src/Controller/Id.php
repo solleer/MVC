@@ -9,7 +9,7 @@ class Id {
 	}
 
 	public function id($id) {
-		$this->model->set_id($id);
+		$this->model->setId($id);
 	}
 
 }

@@ -9,7 +9,7 @@ class Id implements Idable {
         $this->maphper = $maphper;
     }
 
-    public function set_id($id) {
+    public function setId($id) {
         $this->id = $id;
     }
 
