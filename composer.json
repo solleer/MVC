@@ -2,5 +2,9 @@
     "name" : "solleer/mvc",
     "autoload": {
         "classmap": ["src/"]
+    },
+    "require" : {
+        "phpmailer/phpmailer": "~5.2",
+        "gargron/fileupload": "~1.4.0"
     }
 }
