@@ -12,12 +12,10 @@ class Form {
     }
 
     public function submit() {
-        if ($this->model->submit($this->request->post() ? $this->request->post() : null) == true) {
-            $this->model->success();
-        }
+        if ($this->model->submit($this->request->post() ?? null)) $this->model->success();
     }
 
-    public function main($data = null) {
+    public function main(...$data = null) {
         $this->model->main($data);
     }
 }

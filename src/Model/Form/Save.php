@@ -1,20 +1,20 @@
 <?php
 namespace MVC\Model\Form;
 class Save implements \MVC\Model\Form {
-    protected $maphper;
-    protected $validator;
+    private $mapper;
+    private $validator;
     public $successful = false;
     public $submited = false;
     public $data;
 
-    public function __construct(\Maphper\Maphper $maphper, \Respect\Validation\Rules\AllOf $validator = null) {
-        $this->maphper = $maphper;
+    public function __construct(\ArrayAccess $mapper, \Respect\Validation\Rules\AllOf $validator) {
+        $this->mapper = $mapper;
         $this->validator = $validator;
     }
 
-    public function main($data = null) {
+    public function main($data = [null]) {
         $this->submitted = false;
-        $this->data = $this->maphper[$data[0]];
+        $this->data = $this->mapper[$data[0]];
         return true;
     }
 
@@ -22,7 +22,7 @@ class Save implements \MVC\Model\Form {
         $this->submitted = true;
         $this->data = (object) $data;
         if (!$this->validator->validate((array) $this->data)) return false;
-        $this->maphper[] = $this->data;
+        $this->mapper[] = $this->data;
         return true;
     }
 
@@ -30,5 +30,3 @@ class Save implements \MVC\Model\Form {
         $this->successful = true;
     }
 }
-
-?>

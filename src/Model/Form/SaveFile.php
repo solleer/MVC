@@ -1,30 +1,44 @@
 <?php
 namespace MVC\Model\Form;
-class SaveFile extends Save {
-    protected $uploader;
+class SaveFile implements \MVC\Model\Form {
+    private $saver;
+    private $uploader;
+    private $errors;
+    public $successful = false;
+    public $submited = false;
+    public $data;
 
-    public function __construct(\Maphper\Maphper $maphper,
-            \Respect\Validation\Rules\AllOf $validator, \Upload\File $uploader = null) {
+    public function __construct(Save $validator, \FileUpload\FileUpload $uploader) {
+        $this->saver = $saver;
         $this->uploader = $uploader;
-        parent::__construct($maphper, $validator);
+        $this->uploader->setFileNameGenerator(new \FileUpload\FileNameGenerator\Custom([$this, 'setNewFileName']));
     }
 
-    protected function setNewFileName() {
-        $newFileName = time() . '-' . $this->uploader->getName();
-        $this->uploader->setName($newFileName);
+    private function setNewFileName($sourceName) {
+        return time() . '-' . $sourceName;
+    }
+
+    public function main($data = null) {
+        $this->submitted = false;
+        $this->saver->main($data);
+        $this->data = $this->saver->data;
+        return true;
     }
 
     public function submit($data) {
         $this->submitted = true;
         $this->setNewFileName();
         // Upload File
-        try {
-            $this->uploader->upload();
-        } catch (\Exception $e) {
-            $errors = $this->uploader->getErrors();
-            return false;
+        list($files) = $this->uploader->processAll();
+        foreach ($files as $file) {
+            if (!$file->completed) return false;
+            $data['file_name'] = $file->getFilename();
+            if (!$this->saver->submit($data)) return false;
         }
-        $data['file_name'] = $this->uploader->getNameWithExtension();
-        return parent::submit($data);
+        return true;
+    }
+
+    public function success() {
+        $this->successful = true;
     }
 }

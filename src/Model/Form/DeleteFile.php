@@ -1,19 +1,32 @@
 <?php
 namespace MVC\Model\Form;
-class DeleteFile extends Delete {
-    protected $file_path;
+class DeleteFile implements \MVC\Model\Form {
+    private $filePath;
+    private $deleter;
+    public $successful = false;
+    public $submited = false;
+    public $data;
 
-    public function __construct(\Maphper\Maphper $maphper, $file_path) {
-        $this->file_path = $file_path;
-        parent::__construct($maphper);
+    public function __construct(Delete $deleter, $filePath) {
+        $this->deleter = $deleter;
+        $this->filePath = $filePath;
+    }
+
+    public function main($data = null) {
+        $this->submitted = false;
+        $this->deleter->main($data);
+        $this->data = $this->deleter->data;
+        return true;
     }
 
     public function submit($data) {
-        $file_name = $this->maphper[$data["id"]]->file_name;
-        if (parent::submit($data)) {//var_dump($file_name); exit;
-            unlink($this->file_path . $file_name);
-            return true;
-        }
-        else return false;
+        $this->deleter->main(array_values($data)[0]);
+        $this->data = $this->deleter->data;
+        $fileName = $this->deleter->data->file_name;
+        return $this->deleter->submit($data) && unlink($this->filePath . $fileName);
+    }
+
+    public function success() {
+        $this->successful = true;
     }
 }

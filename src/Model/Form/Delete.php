@@ -1,26 +1,26 @@
 <?php
 namespace MVC\Model\Form;
 class Delete implements \MVC\Model\Form {
-    protected $maphper;
+    private $mapper;
     public $successful = false;
     public $submited = false;
     public $data;
 
-    public function __construct(\Maphper\Maphper $maphper) {
-        $this->maphper = $maphper;
+    public function __construct(\ArrayAccess $mapper) {
+        $this->mapper = $mapper;
     }
 
-    public function main($data = null) {
+    public function main($data = [null]) {
         $this->submitted = false;
-        $this->data = $this->maphper[$data];
+        $this->data = $this->mapper[$data[0]];
         return true;
     }
 
     public function submit($data) {
         $this->submitted = true;
         $this->data = $data;
-        if (!isset($this->maphper[array_values($data)[0]])) return false;
-        unset($this->maphper[array_values($data)[0]]);
+        if (!isset($this->mapper[array_values($data)[0]])) return false;
+        unset($this->mapper[array_values($data)[0]]);
         return true;
     }
 
@@ -28,5 +28,3 @@ class Delete implements \MVC\Model\Form {
         $this->successful = true;
     }
 }
-
-?>
