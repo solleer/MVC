@@ -3,9 +3,9 @@ namespace MVC\Model\Form;
 class Save implements \MVC\Model\Form {
     private $mapper;
     private $validator;
+    private $data;
     public $successful = false;
     public $submited = false;
-    public $data;
 
     public function __construct(\ArrayAccess $mapper, \Respect\Validation\Rules\AllOf $validator) {
         $this->mapper = $mapper;
@@ -28,5 +28,9 @@ class Save implements \MVC\Model\Form {
 
     public function success() {
         $this->successful = true;
+    }
+
+    public function getData() {
+        return $this->data;
     }
 }

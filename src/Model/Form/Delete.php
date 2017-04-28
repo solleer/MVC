@@ -29,4 +29,8 @@ class Delete implements \MVC\Model\Form {
     public function success() {
         $this->successful = true;
     }
+
+    public function getData() {
+        return $this->data;
+    }
 }

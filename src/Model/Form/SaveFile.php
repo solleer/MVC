@@ -3,7 +3,6 @@ namespace MVC\Model\Form;
 class SaveFile implements \MVC\Model\Form {
     private $saver;
     private $uploader;
-    private $errors;
     public $successful = false;
     public $submited = false;
     public $data;
@@ -21,7 +20,6 @@ class SaveFile implements \MVC\Model\Form {
     public function main($data = null) {
         $this->submitted = false;
         $this->saver->main($data);
-        $this->data = $this->saver->data;
         return true;
     }
 
@@ -40,5 +38,9 @@ class SaveFile implements \MVC\Model\Form {
 
     public function success() {
         $this->successful = true;
+    }
+
+    public function getData() {
+        return $this->saver->getData();
     }
 }
