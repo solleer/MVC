@@ -20,7 +20,7 @@ class DeleteFile implements \MVC\Model\Form {
     }
 
     public function submit($data) {
-        $this->deleter->main(array_values($data)[0]);
+        $this->deleter->main($data);
         $this->data = $this->deleter->data;
         $fileName = $this->deleter->data->file_name;
         return $this->deleter->submit($data) && unlink($this->filePath . $fileName);
