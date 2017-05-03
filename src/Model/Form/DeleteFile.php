@@ -1,15 +1,16 @@
 <?php
 namespace MVC\Model\Form;
 class DeleteFile implements \MVC\Model\Form {
-    private $filePath;
     private $deleter;
     private $data;
+    private $filesystem;
     public $successful = false;
     public $submited = false;
 
-    public function __construct(Delete $deleter, $filePath) {
+    public function __construct(Delete $deleter, \League\Flysystem\Filesystem $filesystem) {
         $this->deleter = $deleter;
         $this->filePath = $filePath;
+        $this->filesystem = $filesystem;
     }
 
     public function main($data = null) {
@@ -19,9 +20,10 @@ class DeleteFile implements \MVC\Model\Form {
     }
 
     public function submit($data) {
+        $this->submitted = true;
         $this->deleter->main($data);
         $fileName = $this->getData()->file_name;
-        return $this->deleter->submit($data) && unlink($this->filePath . $fileName);
+        return $this->deleter->submit($data) && $this->filesystem->delete($fileName);
     }
 
     public function success() {

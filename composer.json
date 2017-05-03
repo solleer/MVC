@@ -5,6 +5,7 @@
     },
     "require" : {
         "phpmailer/phpmailer": "~5.2",
-        "gargron/fileupload": "~1.4.0"
+        "gargron/fileupload": "~1.4.0",
+        "league/flysystem": "^1.0"
     }
 }
