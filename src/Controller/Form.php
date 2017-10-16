@@ -15,7 +15,7 @@ class Form {
         if ($this->model->submit($this->request->post() ?? null)) $this->model->success();
     }
 
-    public function main(...$data = null) {
+    public function main(...$data) {
         $this->model->main($data);
     }
 }
