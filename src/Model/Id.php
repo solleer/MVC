@@ -5,7 +5,7 @@ class Id implements Idable {
     private $maphper;
     private $id;
 
-    public function __construct(\Maphper\Maphper $maphper) {
+    public function __construct(\ArrayAccess $maphper) {
         $this->maphper = $maphper;
     }
 
@@ -17,5 +17,3 @@ class Id implements Idable {
         return $this->maphper[$this->id];
     }
 }
-
-?>
