@@ -22,8 +22,13 @@ class Save implements \MVC\Model\Form {
         $this->submitted = true;
         $this->data = (object) $data;
         if (!$this->validator->validate((array) $this->data)) return false;
+        $this->data = $this->deepConvert($data);
         $this->mapper[] = $this->data;
         return true;
+    }
+
+    private function deepConvert($data) {
+        return json_decode(json_encode($data));
     }
 
     public function success() {
