@@ -12,9 +12,9 @@ class Save implements \MVC\Model\Form {
         $this->validator = $validator;
     }
 
-    public function main($data = [null]) {
+    public function main($data = null) {
         $this->submitted = false;
-        $this->data = $this->mapper[$data[0]];
+        $this->data = isset($data[0]) ? ($this->mapper[$data[0]] ?? []) ? [];
         return true;
     }
 
