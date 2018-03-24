@@ -7,7 +7,7 @@ class Delete implements \MVC\Model\Form {
     public $submited = false;
     public $data;
 
-    public function __construct(\ArrayAccess $mapper, $deleteField) {
+    public function __construct(\ArrayAccess $mapper, $deleteField = "id") {
         $this->mapper = $mapper;
         $this->deleteField = $deleteField;
     }
