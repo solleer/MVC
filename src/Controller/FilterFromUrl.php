@@ -10,6 +10,7 @@ class FilterFromUrl {
 	}
 
 	public function filter(...$filter) {
-		$this->model->setFilter(array_combine($this->filterKeys, $filter));
+		if (count($filter) === count($this->filterKeys))
+            $this->model->setFilter(array_combine($this->filterKeys, $filter));
 	}
 }
