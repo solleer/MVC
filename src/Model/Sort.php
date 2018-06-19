@@ -1,14 +1,20 @@
 <?php
 namespace MVC\Model;
-class Sort extends Filter {
-    protected $sort = '';
+class Sort implements Filterable {
+    private $maphper;
+    private $filter = [];
+    private $sort;
 
-    public function __construct(\Maphper\Maphper $maphper, $sort = null) {
+    public function __construct(\Maphper\Maphper $maphper, $sort = '') {
+        $this->maphper = $maphper;
         $this->sort = $sort;
-        parent::__construct($maphper);
+    }
+
+    public function setFilter($filter) {
+        $this->filter = $filter;
     }
 
     public function getData() {
-        return parent::getData()->sort($this->sort);
+        return $this->maphper->filter($this->filter)->sort($this->sort);
     }
 }
