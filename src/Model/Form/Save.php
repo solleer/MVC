@@ -14,7 +14,7 @@ class Save implements \MVC\Model\Form {
 
     public function main($data = null) {
         $this->submitted = false;
-        $this->data = isset($data[0]) ? ($this->mapper[$data[0]] ?? []) ? [];
+        $this->data = !$data ? [] : $this->mapper[$data[0]] ?? [];
         return true;
     }
 

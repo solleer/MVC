@@ -12,9 +12,9 @@ class Delete implements \MVC\Model\Form {
         $this->deleteField = $deleteField;
     }
 
-    public function main($data = [null]) {
+    public function main($data = null) {
         $this->submitted = false;
-        $this->data = $this->mapper[$data[0]];
+        $this->data = !$data ? [] : $this->mapper[$data[0]] ?? [];
         return true;
     }
 
