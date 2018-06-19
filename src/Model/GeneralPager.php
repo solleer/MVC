@@ -1,18 +1,23 @@
 <?php
 namespace MVC\Model;
 
-class GeneralPager implements Pageable {
+class GeneralPager implements Pageable, Filterable {
     private $model;
     private $recordsPerPage;
     private $currentPage = 1;
+    private $filter = [];
 
     public function __construct(\Maphper\Maphper $model, $defaultRecordsPerPage = 30) {
         $this->model = $model;
         $this->recordsPerPage = $defaultRecordsPerPage;
     }
 
+    public function setFilter($filter) {
+        $this->filter = $filter;
+    }
+
     public function find(int $limit, int $offset) {
-        return $this->model->limit($limit)->offset($offset);
+        return $this->model->filter($this->filter)->limit($limit)->offset($offset);
     }
 
     public function setRecordsPerPage(int $records) {

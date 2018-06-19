@@ -10,5 +10,5 @@ ul.pagination li.page a:attr(href) {
     content: attr(href) + iteration();
 }
 ul.pagination li.page a:attr(class):[iteration()=data(getCurrentPage())] {
-    content: attr(class) + " active";
+    content: attr(class) + " c-paginator__link--active";
 }
