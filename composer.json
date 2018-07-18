@@ -4,6 +4,8 @@
         "classmap": ["src/"]
     },
     "require" : {
+        "level-2/maphper" : "^0.9",
+        "respect/validation": "^1.1",
         "phpmailer/phpmailer": "~5.2",
         "gargron/fileupload": "~1.4.0",
         "league/flysystem": "^1.0"
