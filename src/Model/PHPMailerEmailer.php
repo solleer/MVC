@@ -20,7 +20,7 @@ class PHPMailerEmailer implements Emailer {
 
         if (isset($data['from'])) $mailer->setFrom($data['from']);
 
-        $mailer->Subject = $this->subject;
+        $mailer->Subject = $data['subject'] ?? $this->subject;
         $mailer->isHTML(true);
         $mailer->Body = $this->template->output($data)->body;
 
