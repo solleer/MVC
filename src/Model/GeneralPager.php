@@ -16,7 +16,9 @@ class GeneralPager implements Pageable, Filterable {
         $this->filter = $filter;
     }
 
-    public function find(int $limit, int $offset) {
+    public function getCurrentPageRecords() {
+        $offset = ($this->getCurrentPage()-1) * $this->getRecordsPerPage();
+        $limit = $this->getRecordsPerPage();
         return $this->model->filter($this->filter)->limit($limit)->offset($offset);
     }
 
