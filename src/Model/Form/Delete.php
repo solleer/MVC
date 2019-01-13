@@ -4,7 +4,7 @@ class Delete implements \MVC\Model\Form {
     private $mapper;
     private $deleteField;
     public $successful = false;
-    public $submited = false;
+    public $submitted = false;
     public $data;
 
     public function __construct(\ArrayAccess $mapper, $deleteField = "id") {
@@ -32,5 +32,9 @@ class Delete implements \MVC\Model\Form {
 
     public function getData() {
         return $this->data;
+    }
+
+    public function getDeleteField() {
+        return $this->deleteField;
     }
 }

@@ -5,11 +5,10 @@ class DeleteFile implements \MVC\Model\Form {
     private $data;
     private $filesystem;
     public $successful = false;
-    public $submited = false;
+    public $submitted = false;
 
     public function __construct(Delete $deleter, \League\Flysystem\Filesystem $filesystem) {
         $this->deleter = $deleter;
-        $this->filePath = $filePath;
         $this->filesystem = $filesystem;
     }
 
@@ -21,7 +20,7 @@ class DeleteFile implements \MVC\Model\Form {
 
     public function submit($data) {
         $this->submitted = true;
-        $this->deleter->main($data);
+        $this->deleter->main([$data[$this->deleter->getDeleteField()]]);
         $fileName = $this->getData()->file_name;
         return $this->deleter->submit($data) && $this->filesystem->delete($fileName);
     }
@@ -31,6 +30,6 @@ class DeleteFile implements \MVC\Model\Form {
     }
 
     public function getData() {
-        return $this->saver->getData();
+        return $this->deleter->getData() ?? [];
     }
 }
